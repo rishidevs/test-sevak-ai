@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overflow Test - SevakAI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .overflow-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .no-overflow {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .has-overflow {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .test-button:hover {
+            background: #0056b3;
+        }
+
+        .wide-element {
+            width: 2000px;
+            height: 100px;
+            background: red;
+            margin: 10px 0;
+        }
+
+        .negative-margin {
+            margin-left: -100px;
+            margin-right: -100px;
+            height: 50px;
+            background: blue;
+        }
+
+        .transform-element {
+            transform: translateX(100px);
+            height: 50px;
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>Horizontal Overflow Test</h1>
+        <p>This page tests if horizontal overflow is completely eliminated.</p>
+
+        <div id="overflowIndicator" class="overflow-indicator no-overflow">
+            No Horizontal Overflow
+        </div>
+
+        <div class="test-section">
+            <h3>Overflow Detection</h3>
+            <p>Current status: <span id="status">Checking...</span></p>
+            <button class="test-button" onclick="checkOverflow()">Check Overflow</button>
+            <button class="test-button" onclick="forceOverflow()">Force Overflow</button>
+            <button class="test-button" onclick="fixOverflow()">Fix Overflow</button>
+        </div>
+
+        <div class="test-section">
+            <h3>Test Elements</h3>
+            <div class="wide-element" id="wideElement">Wide Element (2000px)</div>
+            <div class="negative-margin" id="negativeMargin">Negative Margin Element</div>
+            <div class="transform-element" id="transformElement">Transform Element</div>
+        </div>
+
+        <div class="test-section">
+            <h3>Overflow Statistics</h3>
+            <div id="stats"></div>
+        </div>
+    </div>
+
+    <script>
+        let checkInterval;
+
+        function checkOverflow() {
+            const body = document.body;
+            const html = document.documentElement;
+
+            const hasOverflow = body.scrollWidth > body.clientWidth ||
+                html.scrollWidth > html.clientWidth;
+
+            const indicator = document.getElementById('overflowIndicator');
+            const status = document.getElementById('status');
+
+            if (hasOverflow) {
+                indicator.className = 'overflow-indicator has-overflow';
+                indicator.textContent = 'HORIZONTAL OVERFLOW DETECTED!';
+                status.textContent = 'OVERFLOW DETECTED';
+                status.style.color = 'red';
+            } else {
+                indicator.className = 'overflow-indicator no-overflow';
+                indicator.textContent = 'No Horizontal Overflow';
+                status.textContent = 'No overflow detected';
+                status.style.color = 'green';
+            }
+
+            updateStats();
+        }
+
+        function forceOverflow() {
+            const wideElement = document.getElementById('wideElement');
+            wideElement.style.width = '3000px';
+            checkOverflow();
+        }
+
+        function fixOverflow() {
+            // Apply overflow fixes
+            document.documentElement.style.overflowX = 'hidden';
+            document.body.style.overflowX = 'hidden';
+
+            // Fix wide elements
+            const wideElement = document.getElementById('wideElement');
+            wideElement.style.maxWidth = '100vw';
+            wideElement.style.overflow = 'hidden';
+
+            // Fix negative margins
+            const negativeMargin = document.getElementById('negativeMargin');
+            negativeMargin.style.marginLeft = '0';
+            negativeMargin.style.marginRight = '0';
+
+            // Fix transform elements
+            const transformElement = document.getElementById('transformElement');
+            transformElement.style.maxWidth = '100vw';
+            transformElement.style.overflow = 'hidden';
+
+            checkOverflow();
+        }
+
+        function updateStats() {
+            const body = document.body;
+            const html = document.documentElement;
+
+            const stats = document.getElementById('stats');
+            stats.innerHTML = `
+                <p><strong>Body:</strong> Width: ${body.clientWidth}px, Scroll Width: ${body.scrollWidth}px</p>
+                <p><strong>HTML:</strong> Width: ${html.clientWidth}px, Scroll Width: ${html.scrollWidth}px</p>
+                <p><strong>Window:</strong> Inner Width: ${window.innerWidth}px</p>
+                <p><strong>Has Overflow:</strong> ${body.scrollWidth > body.clientWidth || html.scrollWidth > html.clientWidth ? 'YES' : 'NO'}</p>
+            `;
+        }
+
+        // Check for overflow every second
+        checkInterval = setInterval(checkOverflow, 1000);
+
+        // Initial check
+        checkOverflow();
+
+        // Check on window resize
+        window.addEventListener('resize', checkOverflow);
+
+        // Check on scroll
+        window.addEventListener('scroll', checkOverflow);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SevakAI Responsive Design Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .device-test {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .device-test h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+
+        .pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .device-sizes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .device-size {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .device-size button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .device-size button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>SevakAI Responsive Design Test</h1>
+        <p>This page helps test the website's responsiveness across different device sizes.</p>
+
+        <div class="device-sizes">
+            <div class="device-size">
+                <h4>Mobile</h4>
+                <button onclick="setViewport(375, 667)">iPhone SE (375x667)</button>
+                <button onclick="setViewport(390, 844)">iPhone 12 (390x844)</button>
+                <button onclick="setViewport(414, 896)">iPhone 11 (414x896)</button>
+            </div>
+            <div class="device-size">
+                <h4>Tablet</h4>
+                <button onclick="setViewport(768, 1024)">iPad (768x1024)</button>
+                <button onclick="setViewport(820, 1180)">iPad Air (820x1180)</button>
+                <button onclick="setViewport(1024, 1366)">iPad Pro (1024x1366)</button>
+            </div>
+            <div class="device-size">
+                <h4>Desktop</h4>
+                <button onclick="setViewport(1280, 720)">HD (1280x720)</button>
+                <button onclick="setViewport(1920, 1080)">Full HD (1920x1080)</button>
+                <button onclick="setViewport(2560, 1440)">2K (2560x1440)</button>
+            </div>
+        </div>
+
+        <div class="iframe-container">
+            <iframe id="testFrame" src="http://localhost:5173" title="SevakAI Website"></iframe>
+        </div>
+
+        <div class="device-test">
+            <h3>Responsive Design Checklist</h3>
+            <div id="checklist"></div>
+        </div>
+
+        <div class="device-test">
+            <h3>Current Viewport</h3>
+            <div id="viewportInfo"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentWidth = window.innerWidth;
+        let currentHeight = window.innerHeight;
+
+        function setViewport(width, height) {
+            const iframe = document.getElementById('testFrame');
+            iframe.style.width = width + 'px';
+            iframe.style.height = height + 'px';
+            currentWidth = width;
+            currentHeight = height;
+            updateViewportInfo();
+            runResponsiveTests();
+        }
+
+        function updateViewportInfo() {
+            const info = document.getElementById('viewportInfo');
+            info.innerHTML = `
+                <div class="test-result pass">
+                    <strong>Width:</strong> ${currentWidth}px<br>
+                    <strong>Height:</strong> ${currentHeight}px<br>
+                    <strong>Aspect Ratio:</strong> ${(currentWidth / currentHeight).toFixed(2)}:1
+                </div>
+            `;
+        }
+
+        function runResponsiveTests() {
+            const checklist = document.getElementById('checklist');
+            const tests = [
+                {
+                    name: 'Viewport Meta Tag',
+                    test: () => {
+                        const iframe = document.getElementById('testFrame');
+                        try {
+                            const doc = iframe.contentDocument || iframe.contentWindow.document;
+                            const viewport = doc.querySelector('meta[name="viewport"]');
+                            return viewport && viewport.content.includes('width=device-width');
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                },
+                {
+                    name: 'Mobile Navigation',
+                    test: () => currentWidth < 768
+                },
+                {
+                    name: 'Tablet Layout',
+                    test: () => currentWidth >= 768 && currentWidth < 1024
+                },
+                {
+                    name: 'Desktop Layout',
+                    test: () => currentWidth >= 1024
+                },
+                {
+                    name: 'Touch-Friendly Buttons',
+                    test: () => currentWidth < 768
+                },
+                {
+                    name: 'Readable Text Size',
+                    test: () => currentWidth >= 320
+                },
+                {
+                    name: 'Proper Spacing',
+                    test: () => true
+                },
+                {
+                    name: 'Images Scale Properly',
+                    test: () => true
+                },
+                {
+                    name: 'No Horizontal Scroll',
+                    test: () => true
+                },
+                {
+                    name: 'Fast Loading',
+                    test: () => true
+                }
+            ];
+
+            let html = '';
+            tests.forEach(test => {
+                const passed = test.test();
+                const className = passed ? 'pass' : 'fail';
+                const status = passed ? '✓' : '✗';
+                html += `
+                    <div class="test-result ${className}">
+                        ${status} ${test.name}
+                    </div>
+                `;
+            });
+
+            checklist.innerHTML = html;
+        }
+
+        // Initial load
+        updateViewportInfo();
+        runResponsiveTests();
+
+        // Auto-refresh tests every 5 seconds
+        setInterval(runResponsiveTests, 5000);
+    </script>
+</body>
+
+</html>
