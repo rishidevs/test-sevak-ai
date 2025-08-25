@@ -169,7 +169,7 @@ const workflowSteps = [
   {
     step: 1,
     title: "Tell us what you need",
-    description: "via quick form or chat."
+    description: "Skip the typing—speak your requirements in your language using our voice feature."
   },
   {
     step: 2,
@@ -179,17 +179,17 @@ const workflowSteps = [
   {
     step: 3,
     title: "View profiles & interviews",
-    description: "Video interviews + skill tags + availability"
+    description: "Flexible video interviews—set the time that suits you."
   },
   {
-    step: 4,
-    title: "Choose how to interview",
-    description: "→ Option 1: Schedule a video call\n→ Option 2: Let us pre-screen and send a summary report"
+      "step": 4,
+  "title": "Choose how to interview",
+  "description": "→ Option 1: Connect directly with a video call<br/>→ Option 2: Save time—get our pre-screening with a summary report"
   },
   {
     step: 5,
     title: "Hire directly. Pay directly.",
-    description: "You discuss salary with Sevak and pay them fully"
+    description: "No middlemen—hire and pay your Sevak directly. Discuss the salary and handle payment your way."
   },
 ];
 

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Utensils, Baby, HeartHandshake, Stethoscope } from "lucide-react";
+import { Sparkles, Utensils, Baby, Dog, Heart } from "lucide-react";
 
 const Services = () => {
   useEffect(() => {
@@ -13,38 +13,38 @@ const Services = () => {
   const services = [
     {
       icon: Sparkles,
-      title: "Maids & Housekeepers",
+      title: "Maids",
       description: "Daily cleaning, dishes, sweeping, mopping, dusting",
       features: ["Full-time", "Part-time", "One-time deep clean"],
       highlights: ["Trust score + availability match", "Multilingual onboarding: Hindi, Telugu, Tamil, etc."],
     },
     {
       icon: Utensils,
-      title: "Cooks & Chefs",
+      title: "Cooks",
       description: "Daily meals, diet-specific cooking, regional specialties",
       features: ["Breakfast shifts", "Lunch shifts", "Dinner shifts"],
       highlights: ["Audio answers for food preferences", "Skill tags (veg/non-veg)"],
     },
     {
       icon: Baby,
-      title: "Nannies & Babysitters",
+      title: "Nannies",
       description: "Infant care, toddler engagement, after-school help",
       features: ["Screened for child-safety", "Behavior score verified"],
       highlights: ["Listen to how they interact with children"],
     },
     {
-      icon: HeartHandshake,
-      title: "Elderly Care Assistants",
-      description: "Mobility help, meal support, companionship, reminders",
-      features: ["Compassionate Sevaks", "Past experience verified"],
-      highlights: ["AI picks patient-friendly profiles", "Language match preferences"],
+      icon: Dog,
+      title: "Pet Sitters",
+      description: "Pet feeding, walking, grooming, companionship",
+      features: ["Daily visits", "Overnight care", "Pet-specific training"],
+      highlights: ["AI-matched pet-friendly profiles", "Experience with various pets"],
     },
     {
-      icon: Stethoscope,
-      title: "Patient Care at Home",
-      description: "Post-surgery care, medication reminders, hygiene help",
-      features: ["Trained attendants", "Female/male preference available"],
-      highlights: ["Skill tags: lifting, bathing, oxygen familiarity"],
+      icon: Heart,
+      title: "Elderly Caregivers",
+      description: "Mobility help, meal support, companionship, reminders",
+      features: ["Compassionate caregivers", "Past experience verified"],
+      highlights: ["AI picks patient-friendly profiles", "Language match preferences"],
     },
   ];
 
