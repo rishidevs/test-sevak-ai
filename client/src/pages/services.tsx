@@ -1,17 +1,44 @@
 /** @jsxImportSource react */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Utensils, Baby, Dog, Heart } from "lucide-react";
 
 const Services = () => {
   const [, setLocation] = useLocation();
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   
+  const titles = [
+    {
+      firstLine: "Hire Trusted Help",
+      secondLine: "Without the Guesswork",
+      language: "English"
+    },
+    {
+      firstLine: "विश्वसनीय सहायता किराए पर लें",
+      secondLine: "बिना अनुमान के",
+      language: "Hindi"
+    },
+    {
+      firstLine: "నమ్మదగిన సహాయాన్ని నియమించండి",
+      secondLine: "అంచనా లేకుండా",
+      language: "Telugu"
+    }
+  ];
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
+    }, 3000); // Change title every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [titles.length]);
 
   // Navigation handlers
   const handleFindYourSevak = () => {
@@ -79,11 +106,49 @@ const Services = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 px-4">
-            <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 bg-clip-text text-transparent whitespace-normal break-words leading-tight">
-              Everything Your Home Needs — In One Place
-            </span>
-          </h1>
+          <AnimatePresence mode="wait">
+                          <motion.h1
+                key={currentTitleIndex}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 px-4"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={`first-${currentTitleIndex}`}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className={`text-slate-900 whitespace-normal break-words block leading-relaxed ${
+                      titles[currentTitleIndex].language === 'English' 
+                        ? 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl' 
+                        : 'text-lg sm:text-xl md:text-2xl lg:text-3xl'
+                    }`}
+                  >
+                    {titles[currentTitleIndex].firstLine}
+                  </motion.span>
+                </AnimatePresence>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={`second-${currentTitleIndex}`}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className={`bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 bg-clip-text text-transparent whitespace-normal break-words block leading-relaxed ${
+                      titles[currentTitleIndex].language === 'English' 
+                        ? 'text-2xl sm:text-3xl md:text-4xl lg:text-5xl' 
+                        : 'text-lg sm:text-xl md:text-2xl lg:text-3xl'
+                    }`}
+                  >
+                    {titles[currentTitleIndex].secondLine}
+                  </motion.span>
+                </AnimatePresence>
+              </motion.h1>
+          </AnimatePresence>
           <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto px-4">
             Verified domestic Sevaks, AI-matched to your needs.
           </p>

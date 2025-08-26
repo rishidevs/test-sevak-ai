@@ -43,7 +43,7 @@ import {
   trackSectionView
 } from "@/lib/analytics";
 import { Analytics } from "@vercel/analytics/react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Mock data for Featured Sevaks
 const featuredSevaks = [
@@ -525,6 +525,25 @@ export default function Landing() {
   const [otp, setOtp] = useState('');
   const sectionsRef = useRef<(HTMLElement | null)[]>([]);
   const [activeSection, setActiveSection] = useState("home");
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  
+  const titles = [
+    {
+      firstLine: "Hire Trusted Help",
+      secondLine: "Without the Guesswork",
+      language: "English"
+    },
+    {
+      firstLine: "विश्वसनीय सहायता किराए पर लें",
+      secondLine: "बिना अनुमान के",
+      language: "Hindi"
+    },
+    {
+      firstLine: "నమ్మదగిన సహాయాన్ని నియమించండి",
+      secondLine: "అంచనా లేకుండా",
+      language: "Telugu"
+    }
+  ];
 
   useEffect(() => {
     initScrollTracking();
@@ -567,6 +586,14 @@ export default function Landing() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
+    }, 3000); // Change title every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [titles.length]);
 
   const helpTypes = [
     'Maid/Housekeeper',
@@ -691,11 +718,38 @@ export default function Landing() {
       variants={heroVariants}
     >
       <span className="relative inline-block">
-        <span className="text-slate-900 whitespace-normal break-words">Hire Trusted Help</span>
-        <br />
-        <span className="bg-gradient-to-r from-orange-500 via-orange-400 to-amber-400 bg-clip-text text-transparent whitespace-normal break-words">
-          Without the Guesswork
-        </span>
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={`first-${currentTitleIndex}`}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className={`text-slate-900 whitespace-normal break-words block leading-relaxed ${
+              titles[currentTitleIndex].language === 'English' 
+                ? 'text-2xl sm:text-3xl md:text-4xl lg:text-6xl' 
+                : 'text-lg sm:text-xl md:text-2xl lg:text-4xl'
+            }`}
+          >
+            {titles[currentTitleIndex].firstLine}
+          </motion.span>
+        </AnimatePresence>
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={`second-${currentTitleIndex}`}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className={`bg-gradient-to-r from-orange-500 via-orange-400 to-amber-400 bg-clip-text text-transparent whitespace-normal break-words block leading-relaxed ${
+              titles[currentTitleIndex].language === 'English' 
+                ? 'text-2xl sm:text-3xl md:text-4xl lg:text-6xl' 
+                : 'text-lg sm:text-xl md:text-2xl lg:text-4xl'
+            }`}
+          >
+            {titles[currentTitleIndex].secondLine}
+          </motion.span>
+        </AnimatePresence>
         {/* Shimmer Effect */}
         <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent translate-x-[-100%] animate-shimmer"></span>
       </span>
