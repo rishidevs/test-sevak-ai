@@ -1,14 +1,30 @@
 /** @jsxImportSource react */
 import React, { useEffect } from "react";
+import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Utensils, Baby, Dog, Heart } from "lucide-react";
 
 const Services = () => {
+  const [, setLocation] = useLocation();
+  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
+
+  // Navigation handlers
+  const handleFindYourSevak = () => {
+    // Navigate to landing page and scroll to download section
+    localStorage.setItem("scrollToSection", "app-download");
+    setLocation("/");
+  };
+
+  const handleLearnMore = () => {
+    // Navigate to landing page and scroll to how it works section
+    localStorage.setItem("scrollToSection", "how-it-works");
+    setLocation("/");
+  };
 
   const services = [
     {
@@ -159,10 +175,16 @@ const Services = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-flex flex-col sm:flex-row gap-4">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200">
+            <button 
+              onClick={handleFindYourSevak}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
+            >
               Find Your Sevak
             </button>
-            <button className="border border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 rounded-lg font-semibold transition-colors duration-200">
+            <button 
+              onClick={handleLearnMore}
+              className="border border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-3 rounded-lg font-semibold transition-colors duration-200"
+            >
               Learn More
             </button>
           </div>

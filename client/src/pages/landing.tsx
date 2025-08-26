@@ -531,6 +531,23 @@ export default function Landing() {
   }, []);
 
   useEffect(() => {
+    // Handle scrolling to sections when navigating from other pages
+    const scrollToSectionFromStorage = localStorage.getItem("scrollToSection");
+    if (scrollToSectionFromStorage) {
+      // Clear the localStorage item
+      localStorage.removeItem("scrollToSection");
+      
+      // Wait for the page to render and then scroll
+      setTimeout(() => {
+        const element = document.getElementById(scrollToSectionFromStorage);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
 
@@ -817,7 +834,7 @@ export default function Landing() {
         { icon: Shield, title: "Background Verified", desc: "ID checks, face scans, and experience verified" },
         { icon: Phone, title: "Interview Options", desc: "Shortlisted Sevaks can be pre-screened by you or us." },
         { icon: IndianRupee, title: "No Commissions", desc: " Sevaks receive 100% of what you pay — no cuts, no middlemen." },
-        { icon: Award, title: "30-Day Match Guarantee", desc: "Can’t find a match? Get your money back." },
+        { icon: Award, title: "30-Day Match Guarantee", desc: "Can't find a match? Get your money back." },
       ].map((item, index) => (
         <motion.div
           key={index}
