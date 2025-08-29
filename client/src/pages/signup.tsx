@@ -78,7 +78,7 @@ export default function Signup() {
     } catch (error) {
       toast({
         title: "Signup Failed",
-        description: "An unexpected error occurred",
+        description: "An unexpected error occurred.",
         variant: "destructive",
       });
     } finally {
@@ -94,14 +94,14 @@ export default function Signup() {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
             SevakAI 🙌
           </h1>
-          <p className="text-slate-600 mt-2">Join thousands of happy families</p>
-          <p className="text-sm text-slate-500 mt-1">Empowering homes and workers with AI</p>
+          <p className="text-slate-600 mt-2">Join thousands of happy families.</p>
+          <p className="text-sm text-slate-500 mt-1">Empowering homes and workers with AI.</p>
         </div>
 
         <Card className="border-0 shadow-xl">
           <CardHeader className="space-y-1 text-center">
             <h2 className="text-2xl font-semibold text-slate-900">Create Account</h2>
-            <p className="text-slate-600">Start your journey to find trusted helpers</p>
+            <p className="text-slate-600">Start your journey to find trusted helpers.</p>
           </CardHeader>
           
           <CardContent>

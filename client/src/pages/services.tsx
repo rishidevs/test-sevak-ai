@@ -1,3 +1,4 @@
+
 /** @jsxImportSource react */
 import React, { useEffect, useState } from "react";
 import { useLocation } from "wouter";
@@ -57,37 +58,37 @@ const Services = () => {
     {
       icon: Sparkles,
       title: "Maids",
-      description: "Daily cleaning, dishes, sweeping, mopping, dusting",
+      description: "Daily cleaning, dishes, sweeping, mopping, dusting.",
       features: ["Full-time", "Part-time", "One-time deep clean"],
-      highlights: ["Trust score + availability match", "Multilingual onboarding: Hindi, Telugu, Tamil, etc."],
+      highlights: ["Trust score + availability match.", "Multilingual onboarding: Hindi, Telugu, Tamil, etc."],
     },
     {
       icon: Utensils,
       title: "Cooks",
-      description: "Daily meals, diet-specific cooking, regional specialties",
+      description: "Daily meals, diet-specific cooking, regional specialties.",
       features: ["Breakfast shifts", "Lunch shifts", "Dinner shifts"],
-      highlights: ["Audio answers for food preferences", "Skill tags (veg/non-veg)"],
+      highlights: ["Audio answers for food preferences.", "Skill tags (veg/non-veg)."],
     },
     {
       icon: Baby,
       title: "Nannies",
-      description: "Infant care, toddler engagement, after-school help",
+      description: "Infant care, toddler engagement, after-school help.",
       features: ["Screened for child-safety", "Behavior score verified"],
-      highlights: ["Listen to how they interact with children"],
+      highlights: ["Listen to how they interact with children."],
     },
     {
       icon: Dog,
       title: "Pet Sitters",
-      description: "Pet feeding, walking, grooming, companionship",
+      description: "Pet feeding, walking, grooming, companionship.",
       features: ["Daily visits", "Overnight care", "Pet-specific training"],
-      highlights: ["AI-matched pet-friendly profiles", "Experience with various pets"],
+      highlights: ["AI-matched pet-friendly profiles.", "Experience with various pets."],
     },
     {
       icon: Heart,
       title: "Elderly Caregivers",
-      description: "Mobility help, meal support, companionship, reminders",
+      description: "Mobility help, meal support, companionship, reminders.",
       features: ["Compassionate caregivers", "Past experience verified"],
-      highlights: ["AI picks patient-friendly profiles", "Language match preferences"],
+      highlights: ["AI picks patient-friendly profiles.", "Language match preferences."],
     },
   ];
 

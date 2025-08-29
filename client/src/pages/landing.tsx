@@ -174,7 +174,7 @@ const workflowSteps = [
   {
     step: 2,
     title: "Get matched by our AI",
-    description: "Top 3 verified Sevaks based on your needs"
+    description: "Top 3 verified Sevaks based on your needs."
   },
   {
     step: 3,
@@ -184,7 +184,7 @@ const workflowSteps = [
   {
       "step": 4,
   "title": "Choose how to interview",
-  "description": "→ Option 1: Connect directly with a video call<br/>→ Option 2: Save time—get our pre-screening with a summary report"
+  "description": "→ Option 1: Connect directly with a video call.<br/>→ Option 2: Save time—get our pre-screening with a summary report."
   },
   {
     step: 5,
@@ -885,9 +885,9 @@ export default function Landing() {
       {[
         { icon: Zap, title: "AI-Matched Sevaks", desc: "We help you discover the ideal fit through skills, language, and availability." },
         { icon: Mic, title: "Multilingual Support", desc: "Sevaks available in multiple languages." },
-        { icon: Shield, title: "Background Verified", desc: "ID checks, face scans, and experience verified" },
+        { icon: Shield, title: "Background Verified", desc: "ID checks, face scans, and experience verified." },
         { icon: Phone, title: "Interview Options", desc: "Shortlisted Sevaks can be pre-screened by you or us." },
-        { icon: IndianRupee, title: "No Commissions", desc: " Sevaks receive 100% of what you pay — no cuts, no middlemen." },
+        { icon: IndianRupee, title: "No Commissions", desc: "Sevaks receive 100% of what you pay — no cuts, no middlemen." },
         { icon: Award, title: "30-Day Match Guarantee", desc: "Can't find a match? Get your money back." },
       ].map((item, index) => (
         <motion.div

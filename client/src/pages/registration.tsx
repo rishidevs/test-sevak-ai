@@ -80,7 +80,7 @@ export default function Registration() {
     sessionStorage.setItem("registrationProgress", JSON.stringify(formData));
     toast({
       title: "Progress Saved",
-      description: "Your information has been saved successfully",
+      description: "Your information has been saved successfully.",
     });
   };
 
@@ -159,7 +159,7 @@ export default function Registration() {
                       />
                     </FormControl>
                   </div>
-                  <p className="text-xs text-slate-500">We'll send you updates and helper recommendations via SMS</p>
+                  <p className="text-xs text-slate-500">We'll send you updates and helper recommendations via SMS.</p>
                   <FormMessage />
                 </FormItem>
               )}

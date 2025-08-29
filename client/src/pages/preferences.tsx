@@ -59,7 +59,7 @@ export default function Preferences() {
     sessionStorage.setItem("preferencesProgress", JSON.stringify(formData));
     toast({
       title: "Progress Saved",
-      description: "Your preferences have been saved successfully",
+      description: "Your preferences have been saved successfully.",
     });
   };
 

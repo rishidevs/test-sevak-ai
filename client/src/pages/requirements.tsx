@@ -71,7 +71,7 @@ export default function Requirements() {
     sessionStorage.setItem("requirementsProgress", JSON.stringify(formData));
     toast({
       title: "Progress Saved",
-      description: "Your requirements have been saved successfully",
+      description: "Your requirements have been saved successfully.",
     });
   };
 

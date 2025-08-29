@@ -88,7 +88,7 @@ export function Footer() {
     } catch {
       toast({
         title: "Subscription Failed",
-        description: "Please try again later",
+        description: "Please try again later.",
         variant: "destructive",
       });
     } finally {

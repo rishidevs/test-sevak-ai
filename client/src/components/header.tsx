@@ -47,7 +47,7 @@ export function Header() {
     } else {
       toast({
         title: "Signed Out",
-        description: "You have been successfully signed out",
+        description: "You have been successfully signed out.",
       });
       setLocation("/login");
     }
